@@ -1,0 +1,2 @@
+# django-eshopper
+Python programming
