@@ -73,3 +73,15 @@ class HomeRec(models.Model):
         verbose_name = 'HomeRec'
         verbose_name_plural = 'HomeRecs'
 
+
+class HomeShipping(models.Model):
+    name = models.CharField('HomeShipping name', max_length=10, blank=True)
+    img = models.ImageField('Shipping name', upload_to='media')
+
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'HomeShipping'
+        verbose_name_plural = 'HomeShippings'

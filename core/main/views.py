@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import HomeCarusel, HomeCategory, HomeSubCategory, HomeFeatureItem, HomeBrand, HomeRec
+from .models import HomeCarusel, HomeCategory, HomeSubCategory, HomeFeatureItem, HomeBrand, HomeRec, HomeShipping
 from django.views.generic import ListView, DetailView
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, View, FormView, TemplateView, CreateView
@@ -51,10 +51,11 @@ class HomeListView(ListView):
     def get(self, request):
         homecarusels = HomeCarusel.objects.all()
         category = HomeCategory.objects.all()
+        ships = HomeShipping.objects.all()
         brands = HomeBrand.objects.all()
         items = HomeFeatureItem.objects.all()
         recs = HomeRec.objects.all()
-        return render(request, self.template_name, {'homecarusels':homecarusels, 'category':category, 'brands':brands, 'items':items, 'recs':recs})
+        return render(request, self.template_name, {'homecarusels':homecarusels, 'category':category, 'brands':brands, 'items':items, 'recs':recs, 'ships':ships})
 
 
 
@@ -65,7 +66,8 @@ class ProdListView(ListView):
         items = HomeFeatureItem.objects.all()
         category = HomeCategory.objects.all()
         brands = HomeBrand.objects.all()
-        return render(request, self.template_name, {'items':items, 'category':category, 'brands':brands,})
+        ships = HomeShipping.objects.all()
+        return render(request, self.template_name, {'items':items, 'category':category, 'brands':brands,'ships':ships})
 
 class ProdDetailView(DetailView):
     template_name = 'product-details.html'
@@ -74,4 +76,5 @@ class ProdDetailView(DetailView):
         items = HomeFeatureItem.objects.get(pk=id)
         category = HomeCategory.objects.all()
         brands = HomeBrand.objects.all()
-        return render(request, self.template_name, {'items':items, 'category':category, 'brands':brands,})
+        ships = HomeShipping.objects.all()
+        return render(request, self.template_name, {'items':items, 'category':category, 'brands':brands,'ships':ships})
